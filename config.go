@@ -19,13 +19,6 @@ type Config struct {
 	CustomMatcher map[string][]string
 }
 
-func NewConfig() *Config {
-	return &Config{
-		Keymap:  NewKeymap(),
-		Matcher: IgnoreCaseMatch,
-		Style:   NewStyleSet(),
-	}
-}
 
 func (c *Config) ReadFilename(filename string) error {
 	f, err := os.Open(filename)
