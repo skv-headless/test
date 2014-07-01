@@ -103,13 +103,16 @@ func stringsToStyle(raw []string) *Style {
 
 	for _, s := range raw {
 		fg, ok := stringToFg[s]
-		if ok {
-			style.fg = fg
-		}
+		fg, ok := stringToFg[s]
 
 		bg, ok := stringToBg[s]
+
 		if ok {
-			style.bg = bg
+			//style.bg = bg
+		}
+
+		if ok {
+			style.fg = fg
 		}
 	}
 
