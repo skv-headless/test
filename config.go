@@ -158,9 +158,6 @@ func LocateRcfile() (string, error) {
 		}
 	}
 
-	// this standard does not take into consideration windows (duh)
-	// while the spec says use ":" as the separator, Go provides us
-	// with filepath.ListSeparator, so use it
 	if dirs := os.Getenv("XDG_CONFIG_DIRS"); dirs != "" {
 		for _, dir := range strings.Split(dirs, fmt.Sprintf("%c", filepath.ListSeparator)) {
 			file, err := _locateRcfileIn(filepath.Join(dir, "peco"))
