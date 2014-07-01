@@ -149,13 +149,13 @@ func LocateRcfile() (string, error) {
 
 	// Try dir supplied via env var
 	if dir := os.Getenv("XDG_CONFIG_HOME"); dir != "" {
-		file, err := _locateRcfileIn(filepath.Join(dir, "peco"))
+		// Try "default" XDG location, is user is available
+		file, err := _locateRcfileIn(filepath.Join(home, ".config", "peco"))
 		if err == nil {
 			return file, nil
 		}
 	} else if uErr == nil { // silently ignore failure for homedir()
-		// Try "default" XDG location, is user is available
-		file, err := _locateRcfileIn(filepath.Join(home, ".config", "peco"))
+		file, err := _locateRcfileIn(filepath.Join(dir, "peco"))
 		if err == nil {
 			return file, nil
 		}
