@@ -34,6 +34,13 @@ func (c *Config) ReadFilename(filename string) error {
 	return nil
 }
 
+type StyleSet struct {
+	Basic          Style `json:"Basic"`
+	SavedSelection Style `json:"SavedSelection"`
+	Selected       Style `json:"Selected"`
+	Query          Style `json:"Query"`
+}
+
 var (
 	stringToFg = map[string]termbox.Attribute{
 		"default": termbox.ColorDefault,
@@ -63,13 +70,6 @@ var (
 		"blink":     termbox.AttrReverse,
 	}
 )
-
-type StyleSet struct {
-	Basic          Style `json:"Basic"`
-	SavedSelection Style `json:"SavedSelection"`
-	Selected       Style `json:"Selected"`
-	Query          Style `json:"Query"`
-}
 
 func NewStyleSet() StyleSet {
 	return StyleSet{
