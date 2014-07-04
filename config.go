@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
 	"github.com/nsf/termbox-go"
 )
 
@@ -160,6 +161,13 @@ func LocateRcfile() (string, error) {
 		}
 	}
 
+	if uErr == nil { // silently ignore failure for homedir()
+		file, err := _locateRcfileIn(filepath.Join(home, ".peco"))
+		if err == nil {
+			return file, nil
+		}
+	}
+
 	if dirs := os.Getenv("XDG_CONFIG_DIRS"); dirs != "" {
 		for _, dir := range strings.Split(dirs, fmt.Sprintf("%c", filepath.ListSeparator)) {
 			file, err := _locateRcfileIn(filepath.Join(dir, "peco"))
@@ -169,12 +177,8 @@ func LocateRcfile() (string, error) {
 		}
 	}
 
-	if uErr == nil { // silently ignore failure for homedir()
-		file, err := _locateRcfileIn(filepath.Join(home, ".peco"))
-		if err == nil {
-			return file, nil
-		}
-	}
-
 	return "", fmt.Errorf("Config file not found")
 }
+
+
+
