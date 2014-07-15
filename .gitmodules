@@ -1,0 +1,3 @@
+[submodule "hashie"]
+	path = hashie
+	url = git@localhost:Sokovikov/hashie.git
